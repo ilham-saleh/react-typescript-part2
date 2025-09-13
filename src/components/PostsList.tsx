@@ -3,7 +3,19 @@ import usePosts from "../hooks/usePosts";
 
 const PostsList = () => {
   const [userId, setUserId] = useState<number>();
-  const { data: posts, error, isLoading } = usePosts(userId);
+  const pageSize = 10;
+  const [page, setPage] = useState(1);
+
+  const {
+    data: posts,
+    error,
+    isLoading,
+  } = usePosts({ userId, page, pageSize });
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setUserId(Number(e.target.value));
+    setPage(1);
+  };
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -12,7 +24,7 @@ const PostsList = () => {
   return (
     <>
       <select
-        onChange={(e) => setUserId(Number(e.target.value))}
+        onChange={handleChange}
         value={userId}
         className="m-4 p-2 border rounded"
       >
@@ -31,6 +43,19 @@ const PostsList = () => {
           </li>
         ))}
       </ul>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
+        onClick={() => setPage(page - 1)}
+        disabled={page === 1}
+      >
+        Previous
+      </button>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={() => setPage(page + 1)}
+      >
+        Next
+      </button>
     </>
   );
 };
