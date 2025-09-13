@@ -1,15 +1,15 @@
-// https://jsonplaceholder.typicode.com/todos
-
-import InfinitePosts from "./components/InfinitePosts";
-import PostsList from "./components/PostsList";
-// import TodoList from "./components/TodoList";
+// import InfinitePosts from "./components/InfinitePosts";
+// import PostsList from "./components/PostsList";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 
 function App() {
   return (
     <>
-      {/* <TodoList /> */}
+      <TodoForm />
+      <TodoList />
       {/* <PostsList /> */}
-      <InfinitePosts />
+      {/* <InfinitePosts /> */}
     </>
   );
 }
