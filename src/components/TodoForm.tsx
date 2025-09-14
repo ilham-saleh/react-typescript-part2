@@ -18,7 +18,7 @@ const TodoForm = () => {
 
   const addTodo = useMutation({
     mutationFn: (todo: Todo) => postTodo(todo),
-    onSuccess: (savedTodo, newTodo) => {
+    onSuccess: (savedTodo) => {
       // Best approach - invalidating cache (and refetch)
       //   queryClient.invalidateQueries({
       //     queryKey: ["todos"],
@@ -26,7 +26,7 @@ const TodoForm = () => {
 
       // Second approach to update cache directly
       queryClient.setQueryData<Todo[]>(["todos"], (oldTodos) => {
-        return [savedTodo as Todo, ...(oldTodos ?? [])];
+        return [savedTodo, ...(oldTodos ?? [])];
       });
     },
   });

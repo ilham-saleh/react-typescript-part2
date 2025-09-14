@@ -18,9 +18,7 @@ interface PostQuery {
 }
 
 const useInfinitePosts = (query: PostQuery) => {
-  const fetchPosts = async ({
-    pageParam = 1,
-  }: QueryFunctionContext): Promise<Post[]> => {
+  const fetchPosts = async ({ pageParam = 1 }: QueryFunctionContext) => {
     const res = await axios.get<Post[]>(
       "https://jsonplaceholder.typicode.com/posts",
       {
@@ -34,15 +32,20 @@ const useInfinitePosts = (query: PostQuery) => {
     return res.data;
   };
 
-return useInfiniteQuery<Post[], Error, InfiniteData<Post[]>, (string | number | undefined)[], number>({
-  queryKey: ["posts", query.userId, query.pageSize],
-  queryFn: fetchPosts,
-  initialPageParam: 1,
-  staleTime: 10 * 1000,
-  getNextPageParam: (lastPage, allPages) =>
-    lastPage.length > 0 ? allPages.length + 1 : undefined,
-});
-
+  return useInfiniteQuery<
+    Post[],
+    Error,
+    InfiniteData<Post[]>,
+    (string | number | undefined)[],
+    number
+  >({
+    queryKey: ["posts", query.userId, query.pageSize],
+    queryFn: fetchPosts,
+    initialPageParam: 1,
+    staleTime: 10 * 1000,
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.length > 0 ? allPages.length + 1 : undefined,
+  });
 };
 
 export default useInfinitePosts;
