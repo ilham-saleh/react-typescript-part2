@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { CACHE_KEY_TODOS } from "../constants";
 
 export interface Todo {
   id: number;
@@ -17,7 +18,7 @@ const useTodos = () => {
 
   // we can also customise the useQuery here if needed per query (globally in the main.tsx)
   const query = useQuery<Todo[], Error>({
-    queryKey: ["todos"],
+    queryKey: CACHE_KEY_TODOS,
     queryFn: fetchTodos,
     staleTime: 10 * 1000, // 10 seconds - customize stale time per query
   });
