@@ -1,9 +1,5 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { useRef } from "react";
-import type { Todo } from "../hooks/useTodos";
 import useAddtodo from "../hooks/useAddTodo";
-
 
 const TodoForm = () => {
   const addTodo = useAddtodo(() => {
@@ -45,7 +41,7 @@ const TodoForm = () => {
             className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
             type="submit"
           >
-            {addTodo.isPending ? "Adding" : "Add"}
+            Add
           </button>
         </div>
       </form>
