@@ -28,6 +28,8 @@ const TodoForm = () => {
       queryClient.setQueryData<Todo[]>(["todos"], (oldTodos) => {
         return [savedTodo, ...(oldTodos ?? [])];
       });
+
+      if (ref.current) ref.current.value = "";
     },
   });
 
